@@ -1,0 +1,17 @@
+{
+    "name": "leo/seven_graus",
+    "description": "Seven Graus assessment test for backend developer",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Leo\\SevenGraus\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Leonardo Montenegro",
+            "email": "leonardo@montenegro.com.br"
+        }
+    ],
+    "require": {}
+}
