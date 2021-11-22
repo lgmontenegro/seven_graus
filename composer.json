@@ -13,5 +13,10 @@
             "email": "leonardo@montenegro.com.br"
         }
     ],
-    "require": {}
+    "require": {
+        "ramsey/uuid": "^4.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9"
+    }
 }
