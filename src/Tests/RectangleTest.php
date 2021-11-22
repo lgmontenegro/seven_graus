@@ -16,7 +16,7 @@ class RectangleTest extends TestCase
      * @covers Leo\SevenGraus\Domain\Rectangle::__constructor
      * @return void
      */
-    public function testRectangleContructor()
+    public function testRectangleConstructor()
     {
         $testRectangle = new Rectangle(3.0, 3.0);
         $this->assertInstanceOf('Leo\\SevenGraus\\Domain\\Rectangle', $testRectangle);

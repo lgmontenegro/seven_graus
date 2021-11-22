@@ -16,7 +16,7 @@ class ShapeTest extends TestCase
      * @covers Leo\SevenGraus\Domain\Shape::__constructor
      * @return void
      */
-    public function testShapeContructor()
+    public function testShapeConstructor()
     {
         $testShape = new Shape(3.0, 3.0);
         $this->assertInstanceOf('Leo\\SevenGraus\\Domain\\Shape', $testShape);

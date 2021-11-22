@@ -16,7 +16,7 @@ class CircleTest extends TestCase
      * @covers \Leo\SevenGraus\Domain\Circle::__constructor()
      * @return void
      */
-    public function testCircleContructor()
+    public function testCircleConstructor()
     {
         $testCircle = new Circle(3.0);
         $this->assertInstanceOf('Leo\\SevenGraus\\Domain\\Circle', $testCircle);
