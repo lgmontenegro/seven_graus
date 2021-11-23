@@ -16,6 +16,10 @@ class Response
 
     public function flush()
     {
+        if (array_key_exists("status_code", $this->serverResponse)) {
+            http_response_code(404);
+        }
+
         header("Content-Type: {$this->contentType}");
         echo $this->body;
         exit();

@@ -63,11 +63,16 @@ class Server
             if (strtolower($endpoint->method) == 'get') {
                 if ($endpoint->checkEndpoint($_SERVER["PATH_INFO"])) {
                     $endpoint->handle($this->request, $this->response);
+                    return;
                 }
             }
         }
 
-        return $this->response;
+        $response = array();
+        $response['status_code'] = 404;
+        $this->response->serverResponse = $response;
+
+        return;
     }
 
     private function post()
