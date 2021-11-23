@@ -9,6 +9,7 @@ namespace Leo\SevenGraus\Tests;
 
 use PHPUnit\Framework\TestCase;
 use Leo\SevenGraus\Domain\Circle;
+use Leo\SevenGraus\Service\IDGenerator;
 
 class CircleTest extends TestCase
 {
@@ -54,5 +55,17 @@ class CircleTest extends TestCase
     {
         $testCircle = new Circle(1.0);
         $this->assertEquals(3, $testCircle::TYPE);
+    }
+
+    /**
+     * @covers Leo\SevenGraus\Domain\Circle::__constructor
+     * @return void
+     */
+    public function testShapeIDGenerator()
+    {
+        $IDGen = new IDGenerator();
+
+        $testCircle = new Circle(1.0, $IDGen);
+        $this->assertIsString($testCircle->id());
     }
 }

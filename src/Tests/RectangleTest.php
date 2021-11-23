@@ -9,6 +9,7 @@ namespace Leo\SevenGraus\Tests;
 
 use PHPUnit\Framework\TestCase;
 use Leo\SevenGraus\Domain\Rectangle;
+use Leo\SevenGraus\Service\IDGenerator;
 
 class RectangleTest extends TestCase
 {
@@ -52,7 +53,19 @@ class RectangleTest extends TestCase
      */
     public function testRectangleConstant()
     {
-        $testCircle = new Rectangle(3.0, 3.0);
-        $this->assertEquals(2, $testCircle::TYPE);
+        $testRectangle = new Rectangle(3.0, 3.0);
+        $this->assertEquals(2, $testRectangle::TYPE);
+    }
+
+    /**
+     * @covers Leo\SevenGraus\Domain\Rectangle::__constructor
+     * @return void
+     */
+    public function testRectangleIDGenerator()
+    {
+        $IDGen = new IDGenerator();
+
+        $testRectangle = new Rectangle(3.0, 3.0, $IDGen);
+        $this->assertIsString($testRectangle->id());
     }
 }

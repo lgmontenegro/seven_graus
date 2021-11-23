@@ -7,8 +7,9 @@
 
 namespace Leo\SevenGraus\Domain;
 
-use Ramsey\Uuid\Uuid;
 use Leo\SevenGraus\Domain\Interfaces\ShapeInterface;
+use Leo\SevenGraus\Domain\Interfaces\IDGeneratorInterface;
+use Ramsey\Uuid\Uuid;
 
 /**
  * Represents a Shape and implementes ShapeInterface.
@@ -43,14 +44,25 @@ class Shape implements ShapeInterface
     public string $name;
 
     /**
+     * @var IDGeneratorInterface
+     */
+    protected ?IDGeneratorInterface $idGenerator = null;
+
+    /**
      * @param float $height
      * @param float $width
      */
-    public function __construct(float $height, float $width)
+    public function __construct(float $height, float $width, IDGeneratorInterface $idGenerator = null)
     {
         $this->width = $width;
         $this->height = $height;
-        $this->ID = $this->setID();
+        if (is_null($idGenerator)) {
+            $this->ID = $this->setID();
+            return;
+        }
+
+        $this->idGenerator = $idGenerator;
+        $this->ID = $this->idGenerator->createStringID();
     }
 
     /**
@@ -70,7 +82,7 @@ class Shape implements ShapeInterface
      */
     public function copy(): Shape
     {
-        return new Shape($this->height, $this->width);
+        return new Shape($this->height, $this->width, $this->idGenerator);
     }
 
     /**
@@ -90,6 +102,6 @@ class Shape implements ShapeInterface
      */
     private function setID(): string
     {
-        return Uuid::uuid4();
+        return Uuid::uuid4()->toString();
     }
 }

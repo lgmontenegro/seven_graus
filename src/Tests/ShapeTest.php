@@ -9,6 +9,7 @@ namespace Leo\SevenGraus\Tests;
 
 use PHPUnit\Framework\TestCase;
 use Leo\SevenGraus\Domain\Shape;
+use Leo\SevenGraus\Service\IDGenerator;
 
 class ShapeTest extends TestCase
 {
@@ -52,7 +53,19 @@ class ShapeTest extends TestCase
      */
     public function testShapeConstant()
     {
-        $testCircle = new Shape(3.0, 3.0);
-        $this->assertEquals(1, $testCircle::TYPE);
+        $testShape = new Shape(3.0, 3.0);
+        $this->assertEquals(1, $testShape::TYPE);
+    }
+
+    /**
+     * @covers Leo\SevenGraus\Domain\Shape::__constructor
+     * @return void
+     */
+    public function testShapeIDGenerator()
+    {
+        $IDGen = new IDGenerator();
+
+        $testShape = new Shape(3.0, 3.0, $IDGen);
+        $this->assertIsString($testShape->id());
     }
 }

@@ -5,32 +5,31 @@
  * @author Leonardo Montenegro <leonardo@montenegro.com.br>
  */
 
-namespace Leo\SevenGraus\Domain;
+namespace Leo\SevenGraus\Domain\Interfaces;
 
-use Leo\SevenGraus\Domain\Shape;
+use Ramsey\Uuid\Uuid;
 
 /**
- * Rectangle Object that represents type of Shape.
+ * Interface for generate an ID.
  *
  * @package    SevenGraus
  * @author     Leonardo Montenegro <leonardo@montenegro.com.br>
  * @copyright  Leonardo Montenegro <leonardo@montenegro.com.br>
  * @link       https://www.github.com/lgmontenegro/seven_graus
  */
-class Rectangle extends Shape
+interface IDGeneratorInterface
 {
     /**
-     * @var int TYPE
-     */
-    const TYPE =  2;
-    
-    /**
-     * Returns a new Rectangle object
+     * Generates an string for ID
      *
-     * @return Rectangle
+     * @return string
      */
-    public function copy(): Rectangle
-    {
-        return new Rectangle($this->height, $this->width, $this->idGenerator);
-    }
+    public function createStringID(): string;
+
+    /**
+     * Generates an integer for ID
+     *
+     * @return int
+     */
+    public function createIntegerID(): int;
 }

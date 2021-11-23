@@ -7,6 +7,7 @@
 
 namespace Leo\SevenGraus\Domain;
 
+use Leo\SevenGraus\Domain\Interfaces\IDGeneratorInterface;
 use Leo\SevenGraus\Domain\Shape;
 use Ramsey\Uuid\Uuid;
 
@@ -32,12 +33,23 @@ class Circle extends Shape
     protected float $radius;
 
     /**
+     * @var IDGeneratorInterface
+     */
+    protected ?IDGeneratorInterface $idGenerator = null;
+
+    /**
      * @param float $radius
      */
-    public function __construct(float $radius)
+    public function __construct(float $radius, IDGeneratorInterface $idGenerator = null)
     {
         $this->radius = $radius;
-        $this->ID = $this->setID();
+        if (is_null($idGenerator)) {
+            $this->ID = $this->setID();
+            return;
+        }
+
+        $this->idGenerator = $idGenerator;
+        $this->ID = $this->idGenerator->createStringID();
     }
 
     /**
@@ -57,7 +69,7 @@ class Circle extends Shape
      */
     public function copy(): Circle
     {
-        return new Circle($this->radius);
+        return new Circle($this->radius, $this->idGenerator);
     }
 
     /**
